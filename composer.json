@@ -3,7 +3,6 @@
     "type": "wordpress-plugin",
     "license": "GPL-2.0",
     "homepage": "https://github.com/Fractal-Web/stars-rating",
-    "version": "4.0.0",
     "authors": [
         {
             "name": "Fahid Javid",
