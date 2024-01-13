@@ -184,6 +184,16 @@ if ( ! class_exists( 'Stars_Rating_Public' ) ) :
 
 		}
 
+		public function get_comment_rating( $comment_id ) {
+			$value = get_comment_meta( $comment_id, 'rating', true );
+
+			if ( ! is_numeric( $value ) ) {
+				return 0;
+			}
+
+			return $value;
+		}
+
 		/**
 		 * Add the comment rating (saved earlier) to the comment text
 		 * You can also output the comment rating values directly to the comments template
@@ -194,7 +204,7 @@ if ( ! class_exists( 'Stars_Rating_Public' ) ) :
 				return $comment_text;
 			}
 
-			if ( $rating = get_comment_meta( get_comment_ID(), 'rating', true ) ) {
+			if ( $rating = $this->get_comment_rating( get_comment_ID() ) ) {
 				$rating = '<p>' . wp_kses_post( Stars_Rating::get_rating_stars_markup( $rating ) ) . '</p>';
 
 				return $comment_text . $rating;
@@ -223,7 +233,7 @@ if ( ! class_exists( 'Stars_Rating_Public' ) ) :
 
 			foreach ( $comments as $comment ) {
 
-				$rating = get_comment_meta( $comment->comment_ID, 'rating', true );
+				$rating = $this->get_comment_rating( $comment->comment_ID );
 
 				if ( ! empty( $rating ) ) {
 					$ratings[] = min( max( 1, $rating ), 5 );
