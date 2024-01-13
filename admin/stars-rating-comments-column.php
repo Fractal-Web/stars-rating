@@ -66,7 +66,7 @@ class Stars_Rating_Comments_Column {
 	 */
 	public function display_rating_column_value( $column_name, $comment_ID ) {
 		if ( $column_name === 'rating' ) {
-			$custom_meta_value = get_comment_meta( $comment_ID, 'rating', true );
+			$custom_meta_value = Stars_Rating_Public()->get_comment_rating( $comment_ID );
 
 			echo Stars_Rating::get_rating_stars_markup( $custom_meta_value );
 		}
