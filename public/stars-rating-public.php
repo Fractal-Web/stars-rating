@@ -169,7 +169,7 @@ if ( ! class_exists( 'Stars_Rating_Public' ) ) :
 		/**
 		 * Save the comment rating along with comment
 		 */
-		public function save_comment_rating( $comment_id ) {
+		public function save_comment_rating( $comment_id, $rating = null ) {
 
 			// check if it's a reply then do nothing
 			$comment = get_comment( $comment_id, ARRAY_A );
@@ -177,8 +177,13 @@ if ( ! class_exists( 'Stars_Rating_Public' ) ) :
 				return;
 			}
 
-			if ( ( isset( $_POST['rating'] ) ) && ( $_POST['rating'] != '' ) ) {
-				$rating = min( max( 1, $_POST['rating'] ), 5 );;
+			if ( $rating == null ) {
+				if ( ( isset( $_POST['rating'] ) ) && ( $_POST['rating'] != '' ) ) {
+					$rating = min( max( 1, $_POST['rating'] ), 5 );
+				}
+			}
+
+			if ( $rating != null ) {
 				add_comment_meta( $comment_id, 'rating', $rating );
 			}
 

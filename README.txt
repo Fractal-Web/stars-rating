@@ -42,10 +42,18 @@ Its main features are as follows:
 
 == Usage in theme ==
 
-```
+```php
+<?php
+
 require_once WP_PLUGIN_DIR. '/stars-rating/public/stars-rating-public.php';
+
 $starsRating = Stars_Rating();
-ehco $starsRating->rating_stat($post->ID));
+
+// get rating:
+ehco $starsRating->rating_stat( $post->ID );
+
+// set rating
+$starsRating->save_comment_rating( $post->ID, $rating_number );
 ```
 
 == Screenshots ==
